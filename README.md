@@ -1,3 +1,3 @@
 # Gerador de nick automatico
 
-Agradecimentos a 
+Agradecimentos a @https://github.com/smezzy 
