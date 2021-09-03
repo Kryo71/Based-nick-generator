@@ -8,12 +8,12 @@ fs.readFile('./message.txt', function read(err, data) {
         throw err;
     }
     palavras = data.toString().split(', ');
-    processWords();
+    processWords('');
 });
 
 let quantidade = 6;
 
-var langs = [
+let langs = [
   'auto',
   'af',
   'sq',
@@ -120,13 +120,26 @@ var langs = [
   'zu'
 ];
 
-function processWords() {
-  for(var i = 0; i < quantidade; i ++) {
-    let lang = langs[Math.floor(Math.random() * langs.lenght - 1)];
-  
-    let transText = palavras[Math.floor(Math.random() * langs.lenght - 1)];
-    translate.getText(transText, {to: lang}).then(function(text){
-      console.log(text.text)
-    });
+function processWords(text) {
+  let transText = '';
+  if (text == ''){
+    for(var i = 0; i < quantidade; i ++) {
+      transText += palavras[Math.floor(Math.random() * palavras.length - 1)] + ', ';
+    }
   }
+  else{
+    transText = text;
+  }
+  
+  let lang = langs[Math.floor(Math.random() * langs.length - 1)];
+  
+  translate.getText(transText, {to: lang}).then(function(text){
+    if (Math.round(Math.random()) > 0) {
+      processWords(text.text);
+      console.log("traduzindodnv");
+    }
+    else{
+      console.log(text.text);
+    }
+  });
 }
